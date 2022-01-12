@@ -1327,7 +1327,7 @@
             "method": "GET",
             "header": [],
             "url": "{{base_url}}/groups/",
-            "description": "The `/groups` endpoint returns a list of the created groups.\n\nThe response contains the following properties:\n- Pagination properties;\n- `results`: an array of Groups.\n\nEach Group contains the following properties:\n- `name`: the Group's name;\n- `url`: the url to the Group detailed view;"
+            "description": "The `/groups` endpoint returns a list of the created groups.\n\nThe response contains the following properties:\n\n*   pagination properties;\n*   `results`: an array of Groups.\n    \n\nEach Group contains the following properties:\n\n*   `name`: the Group's name;\n*   `url`: the url to the Group detailed view."
           },
           "response": [
             {
