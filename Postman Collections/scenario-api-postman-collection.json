@@ -340,7 +340,7 @@
             "method": "GET",
             "header": [],
             "url": "{{base_url}}/simulations/{{obj_id}}/",
-            "description": "The `/simulations/{id}` endpoint handles access to specific simulation instances. This detailed view contains all of the simulation's properties."
+            "description": "The `/simulations/{id}` endpoint handles access to specific simulation instances. This detailed view contains all the simulation's properties."
           },
           "response": [
             {
