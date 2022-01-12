@@ -475,7 +475,7 @@
             "method": "GET",
             "header": [],
             "url": "{{base_url}}/simulations/",
-            "description": "A `GET` request to the `/simulations` endpoint will return an object with pagination properties and a `results` array of simulations owned by the User.\n\nThe pagination properties are:\n- `count`: total number of simulations received;\n- `next`: url of the next page of the simulation list;\n- `previous`: url of the previous page of the simulation list.\n\nThe urls will be `null` when the number of simulations is less than the minimum required for a page.\n\nThe list view is more simplified than the detailed view, as such it'll only show these properties:\n- `id`\n- `owner`\n- `title`\n- `date_created`\n- `url`\n\nIf the User is also an Admin, then all simulations are returned."
+            "description": "A `GET` request to the `/simulations` endpoint will return an object with pagination properties and a `results` array of simulations owned by the User.\n\nThe pagination properties are:\n\n*   `count`: total number of simulations received;\n*   `next`: url of the next page of the simulation list;\n*   `previous`: url of the previous page of the simulation list.\n    \n\nThe urls will be `null` when the number of simulations is less than the minimum required for a page.\n\nThe list view is more simplified than the detailed view, as such it'll only show these properties:\n\n*   `id`;\n*   `owner`;\n*   `title`;\n*   `date_created`\n*   `url`.\n    \n\nIf the User is also an Admin, then all simulations are returned."
           },
           "response": [
             {
