@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "75ea1679-5891-4019-b254-ae3e4e1e2df2",
     "name": "Scenario API",
-    "description": "# Introduction\nThe Scenario API is responsible for handling communication between the backend and the frontend of the Scenario Analysis Project. It's capable of receiving requests for creating, reading, and executing simulations, as well as saving the resulting data and returning it when requested.\n\n# Overview\nIn this document, the core requests of the Scenario API are presented in a way similar to the workflow of a scenario analysis execution. Roughly, the following steps are followed:\n1. Create a simulation;\n2. execute the created simulation;\n3. access the data generated through scenario analysis.\n\nSome other important requests are also presented, but requests types such as `PUT` and `PATCH` have not been included, as they're not important for the scenario analysis workflow.\n\nTests were written for all documented requests. All of the requests will have a test that'll check if the status code is correct, while some will have more sophisticated tests for checking the response content and data types. \n\nOne thing to keep is mind is that some requests have redundant tests. For example, in \"Simulation Detail\", there's a test called `Simulation is an object that has only these properties` and another called `Simulation has the correct properties and data types`. The former will fail if the response has any properties other than the ones listed, while the latter will only fail if one of the listed properties is missing (but not if there are extra properties in the response). As such, the former is used as an alert to indicate that the API has been changed and the tests need to be updated, while the latter is used to check for the content of the response itself, since it provides better description of why the test failed.\n\n# Authentication\nThe current method of Authentication is `BasicAuthentication`, and it's required throughout all API endpoints.\n\n# Error Codes\nThe user will receive a `200 OK` status code when the following conditions are met:\n1. The request is authenticated;\n2. the accessed endpoint is allowed for the authenticated user;\n3. the authenticated user is the owner of the data he's trying to access (such as a simulation).\n\n`201 Created` is returned when a simulation is successfully created through a POST request.\n\nOther possible codes are:\n- `401 Unauthorized` is returned if condition (1.) is not met.\n- `403 Forbidden` is returned if condition (2.) is not met.\n- `404 Not Found` is returned if condition (3.) is not met.\n- `500 Internal Server Error` might be returned if the simulation is executed with bad `scenario_analysis_input`, or if an unknown error happens during scenario analysis.\n\n# Rate limit\nNo rate limit has been established, and no load testing has been done as of yet.",
+    "description": "# Introduction\n\nThe Scenario API is responsible for handling communication between the backend and the frontend of the Scenario Analysis Project. It's capable of receiving requests for creating, reading, and executing simulations, as well as saving the resulting data and returning it when requested.\n\n# Overview\n\nIn this document, the core requests of the Scenario API are presented in a way similar to the workflow of a scenario analysis execution. Roughly, the following steps are followed:\n\n1.  create a simulation;\n2.  execute the created simulation;\n3.  access the data generated through scenario analysis.\n    \n\nSome other important requests are also presented, but requests types such as `PUT` and `PATCH` have not been included, as they're not important for the scenario analysis workflow.\n\nTests were written for all documented requests. All of the requests will have a test that'll check if the status code is correct, while some will have more sophisticated tests for checking the response content and data types.\n\nOne thing to keep is mind is that some requests have redundant tests. For example, in \"Simulation Detail\", there's a test called `Simulation is an object that has only these properties` and another called `Simulation has the correct properties and data types`. The former will fail if the response has any properties other than the ones listed, while the latter will only fail if one of the listed properties is missing (but not if there are extra properties in the response). As such, the former is used as an alert to indicate that the API has been changed and the tests need to be updated, while the latter is used to check for the content of the response itself, since it provides better description of why the test failed.\n\n# Authentication\n\nThe current method of Authentication is `BasicAuthentication`, and it's required throughout all API endpoints.\n\n# Error Codes\n\nThe user will receive a `200 OK` status code when the following conditions are met:\n\n1.  the request is authenticated;\n2.  the accessed endpoint is allowed for the authenticated user;\n3.  the authenticated user is the owner of the data he's trying to access (such as a simulation).\n    \n\n`201 Created` is returned when a simulation is successfully created through a POST request.\n\nOther possible codes are:\n\n*   `401 Unauthorized` is returned if condition (1.) is not met;\n*   `403 Forbidden` is returned if condition (2.) is not met;\n*   `404 Not Found` is returned if condition (3.) is not met;\n*   `500 Internal Server Error` might be returned if the simulation is executed with bad `scenario_analysis_input`, or if an unknown error happens during scenario analysis.\n    \n\n# Rate limit\n\nNo rate limit has been established, and no load testing has been done.",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -82,7 +82,7 @@
               }
             }
           ],
-          "_postman_id": "f7accfbc-c76c-4306-94e8-4ce3d1dffc65",
+          "id": "f7accfbc-c76c-4306-94e8-4ce3d1dffc65",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -144,7 +144,7 @@
           ]
         }
       ],
-      "_postman_id": "40d71694-4963-45cf-b993-2da6bd1d43df",
+      "id": "40d71694-4963-45cf-b993-2da6bd1d43df",
       "description": "The default basic root view of the API. This endpoint is used to check the available endpoints in the API, as well as a means of navigation in the API browser view."
     },
     {
@@ -182,7 +182,7 @@
               }
             }
           ],
-          "_postman_id": "22063f27-3712-4264-99f0-40d18116981f",
+          "id": "22063f27-3712-4264-99f0-40d18116981f",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -210,10 +210,7 @@
                   "type": "text",
                   "value": "{{default_scenario_analysis_input}}"
                 }
-              ],
-              "options": {
-                "formdata": {}
-              }
+              ]
             },
             "url": "{{base_url}}/simulations/",
             "description": "By sending a `POST` request to the `/simulations` endpoint, the user is capable of creating a new simulation instance. The `scenario_analysis_input` property sent with the `POST` request will be saved in the simulation's modeller input, while other input and output data properties will have `null` values until the simulation is successfully executed.\n\nThe response is an object containing the created simulation."
@@ -246,10 +243,7 @@
                       "type": "text",
                       "value": "{{default_scenario_analysis_input}}"
                     }
-                  ],
-                  "options": {
-                    "formdata": {}
-                  }
+                  ]
                 },
                 "url": "{{base_url}}/simulations/"
               },
@@ -338,7 +332,7 @@
               }
             }
           ],
-          "_postman_id": "fde089a7-f8aa-489b-8b69-b4a1bea27492",
+          "id": "fde089a7-f8aa-489b-8b69-b4a1bea27492",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -473,7 +467,7 @@
               }
             }
           ],
-          "_postman_id": "3f2b74a2-63e3-4a37-8bae-1956696259c3",
+          "id": "3f2b74a2-63e3-4a37-8bae-1956696259c3",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -536,7 +530,7 @@
           ]
         }
       ],
-      "_postman_id": "8a815576-811a-4eb6-b5a1-29f3fc18448d",
+      "id": "8a815576-811a-4eb6-b5a1-29f3fc18448d",
       "description": "The `/simulations` endpoint handles everything related to simulations: create, read, and execute.\n\nA Simulation contains the following properties:\n\n- `id`: the id of the simulation;\n- `owner`: the username of the User that owns the simulation;\n- `title`: a user defined title for the simulation;\n- `description`: a user defined description for the simulation;\n- `date_created`: the date that the simulation was created (GMT+0);\n- `url`: the url of the simulation;\n- `execute`: the url to execute the simulation;\n- `modeller_input`: the url of the simulation's modeller input;\n- `modeller_output`: the url of the simulation's modeller output;\n- `simulator_output`: the url of the simulation's simulator output;\n- `postprocessor_input`: the url of the simulation's postprocessor input;\n- `postprocessor_output`: the url of the simulation's postprocessor output;"
     },
     {
@@ -583,7 +577,7 @@
               }
             }
           ],
-          "_postman_id": "2a37b4cb-0324-4223-96d6-04bb8ba4845a",
+          "id": "2a37b4cb-0324-4223-96d6-04bb8ba4845a",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -646,7 +640,7 @@
           ]
         }
       ],
-      "_postman_id": "57b1c27f-6707-4430-82d1-191a7c8ca4f7",
+      "id": "57b1c27f-6707-4430-82d1-191a7c8ca4f7",
       "description": "This folder contains requests that integrate the API with the Scenario Analysis simulation."
     },
     {
@@ -690,7 +684,7 @@
               }
             }
           ],
-          "_postman_id": "c7515db2-c076-4ecc-9b27-2dff64b19550",
+          "id": "c7515db2-c076-4ecc-9b27-2dff64b19550",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -790,7 +784,7 @@
               }
             }
           ],
-          "_postman_id": "46d6d3e3-ebad-4725-85e9-f836b40958b4",
+          "id": "46d6d3e3-ebad-4725-85e9-f836b40958b4",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -890,7 +884,7 @@
               }
             }
           ],
-          "_postman_id": "746e01a5-f618-44c2-b4be-2d489645244f",
+          "id": "746e01a5-f618-44c2-b4be-2d489645244f",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -992,7 +986,7 @@
               }
             }
           ],
-          "_postman_id": "284f2bc5-565f-4354-887a-8bc3048142a1",
+          "id": "284f2bc5-565f-4354-887a-8bc3048142a1",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1092,7 +1086,7 @@
               }
             }
           ],
-          "_postman_id": "da0adc38-3231-4284-9dda-b7f7b9e7f22a",
+          "id": "da0adc38-3231-4284-9dda-b7f7b9e7f22a",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1155,7 +1149,7 @@
           ]
         }
       ],
-      "_postman_id": "4bfbc803-050e-479e-8650-119a653c8696",
+      "id": "4bfbc803-050e-479e-8650-119a653c8696",
       "description": "The following endpoints are used to `GET` the data generated by Scenario Analysis."
     },
     {
@@ -1215,7 +1209,7 @@
               }
             }
           ],
-          "_postman_id": "dbcfdb40-c10e-4a98-b122-fa791e207e3f",
+          "id": "dbcfdb40-c10e-4a98-b122-fa791e207e3f",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1325,7 +1319,7 @@
               }
             }
           ],
-          "_postman_id": "3cd90f9b-9910-4158-ae35-ccffffa8cf8d",
+          "id": "3cd90f9b-9910-4158-ae35-ccffffa8cf8d",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1460,7 +1454,7 @@
               }
             }
           ],
-          "_postman_id": "643f208c-72db-435b-85ba-d1d28cc1c9ed",
+          "id": "643f208c-72db-435b-85ba-d1d28cc1c9ed",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1523,7 +1517,7 @@
           ]
         }
       ],
-      "_postman_id": "d2038208-5f79-4d0a-84d0-08057d89ec16",
+      "id": "d2038208-5f79-4d0a-84d0-08057d89ec16",
       "description": "Requests inside this folder were created to have tests verifying the requirement of admin privileges for certain endpoint access and API behaviour.",
       "auth": {
         "type": "basic",
@@ -1574,7 +1568,7 @@
               }
             }
           ],
-          "_postman_id": "4ce71bcd-4fee-4858-a442-e0630d2f3271",
+          "id": "4ce71bcd-4fee-4858-a442-e0630d2f3271",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1605,10 +1599,7 @@
                   "type": "text",
                   "value": "{{default_scenario_analysis_input}}"
                 }
-              ],
-              "options": {
-                "formdata": {}
-              }
+              ]
             },
             "url": "{{base_url}}/simulations/",
             "description": "A non-authenticated User is not able to create a new simulation."
@@ -1631,7 +1622,7 @@
               }
             }
           ],
-          "_postman_id": "cb218d5e-a2f4-4152-b827-eaf3e47da49c",
+          "id": "cb218d5e-a2f4-4152-b827-eaf3e47da49c",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1680,7 +1671,7 @@
               }
             }
           ],
-          "_postman_id": "01825166-7189-440f-922b-16e5ade220d1",
+          "id": "01825166-7189-440f-922b-16e5ade220d1",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1711,7 +1702,7 @@
               }
             }
           ],
-          "_postman_id": "0f333dec-0e3e-4fe5-9471-229bc7dcb6a0",
+          "id": "0f333dec-0e3e-4fe5-9471-229bc7dcb6a0",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -1727,7 +1718,7 @@
           "response": []
         }
       ],
-      "_postman_id": "a244c545-887a-4703-b477-51f9e0bfaaf7",
+      "id": "a244c545-887a-4703-b477-51f9e0bfaaf7",
       "description": "Requests inside this folder were created to have tests verifying the requirement of authentication for endpoint access and API interaction."
     }
   ],
